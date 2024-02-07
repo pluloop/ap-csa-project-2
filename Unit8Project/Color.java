@@ -142,11 +142,9 @@ public class Color {
 		if (cMax == 0) {
 			return 0;
 		}
-		if (cMax != 0) {
+		else {
 			return (int) (delta / cMax);
 		}
-		
-		
 	}
 	
 	private int calculateBrightness(double r, double g, double b) {
@@ -191,11 +189,11 @@ public class Color {
 			r = x;
 			b = 0;
 			g = c;
-		} else if ((hue >= 300 && hue < 360)) {
+		} else {
 			r = c;
 			b = 0;
 			g = x;
-		}
+		} 
 		
 		if ((int)r != r && r < 255) {
 			r = (int)(r + 1);
