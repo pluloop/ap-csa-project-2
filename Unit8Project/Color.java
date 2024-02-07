@@ -107,39 +107,43 @@ public class Color {
 		r /= MAX_COLOR;
 		g /= MAX_COLOR;
 		b /= MAX_COLOR;
-		int cMax = getMaximum(r, g, b);
-		int cMin = getMinimum(r, g, b);
-		int delta = cMax - cMin;
+		double cMax = getMaximum(r, g, b);
+		double cMin = getMinimum(r, g, b);
+		double delta = cMax - cMin;
 	
 		if (delta == 0) {
 			return 0;
 		} 
 		
-		if (cMax == r) {
+		else if (cMax == r) {
 			return (int)(60.0*((g-b)/delta)%6);
 		}
 		
-		if (cMax == g) {
+		else if (cMax == g) {
 			return (int)(60.0*((b-r)/delta)+2);
 		}
 		
-		if (cMax == b) {
+		else if (cMax == b) {
 			return (int)(60.0*((r-g)/delta)+4);
+		}
+		
+		else {
+			return -1;
 		}
 	}
 	private int calculateSaturation(double r, double g, double b) {
 		r /= MAX_COLOR;
 		g /= MAX_COLOR;
 		b /= MAX_COLOR;
-		int cMax = getMaximum(r, g, b);
-		int cMin = getMinimum(r, g, b);
-		int delta = cMax - cMin;
+		double cMax = getMaximum(r, g, b);
+		double cMin = getMinimum(r, g, b);
+		double delta = cMax - cMin;
 		
 		if (cMax == 0) {
 			return 0;
 		}
 		if (cMax != 0) {
-			return delta/cMax;
+			return (int) (delta / cMax);
 		}
 		
 		
@@ -149,9 +153,9 @@ public class Color {
 		r /= MAX_COLOR;
 		g /= MAX_COLOR;
 		b /= MAX_COLOR;
-		int cMax = getMaximum(r, g, b);
+		double cMax = getMaximum(r, g, b);
 		
-		return cMax;
+		return (int) cMax;
 	}
 	
 	public void RGBtoHSV() {

@@ -1,4 +1,6 @@
-import Unit8Project.Color;
+package example;
+
+import Color;
 
 public class ColorConverter {
 	private Color[][] myColors;
