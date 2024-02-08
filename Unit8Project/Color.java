@@ -116,15 +116,15 @@ public class Color {
 		} 
 		
 		else if (cMax == r) {
-			return (int)(60.0*((g-b)/delta)%6);
+			return (int)((60.0*((g-b)/delta)%6));
 		}
 		
 		else if (cMax == g) {
-			return (int)(60.0*((b-r)/delta)+2);
+			return (int)(60.0*(((b-r)/delta)+2));
 		}
 		
 		else if (cMax == b) {
-			return (int)(60.0*((r-g)/delta)+4);
+			return (int)(60.0*(((r-g)/delta)+4));
 		}
 		
 		else {
@@ -143,7 +143,7 @@ public class Color {
 			return 0;
 		}
 		else {
-			return (int) (delta / cMax);
+			return (int)((delta / cMax)*100);
 		}
 	}
 	
@@ -153,7 +153,7 @@ public class Color {
 		b /= MAX_COLOR;
 		double cMax = getMaximum(r, g, b);
 		
-		return (int) cMax;
+		return (int)(cMax*100);
 	}
 	
 	public void RGBtoHSV() {
@@ -166,48 +166,55 @@ public class Color {
 		double b;
 		double g;
 		
-		double c = brightness*saturation;
-		double x = c*(1-Math.abs((hue/60)%2-1));
-		double m = brightness - c;
+		double c = (brightness/100.0)*(saturation/100.0);
+		double x = c*(1-Math.abs((hue/60.0)%2-1));
+		double m = brightness/100.0 - c;
 		if ((hue >= 0 && hue < 60)) {
 			r = c;
-			b = x;
-			g = 0;
+			g = x;
+			b = 0;
 		} else if ((hue >= 60 && hue < 120)) {
 			r = x;
-			b = c;
-			g = 0;
+			g = c;
+			b = 0;
 		} else if ((hue >= 120 && hue < 180)) {
 			r = 0;
-			b = c;
-			g = x;
+			g = c;
+			b = x;
 		} else if ((hue >= 180 && hue < 240)) {
 			r = 0;
-			b = x;
-			g = c;
+			g = x;
+			b = c;
 		} else if ((hue >= 240 && hue < 300)) {
 			r = x;
-			b = 0;
-			g = c;
+			g = 0;
+			b = c;
 		} else {
 			r = c;
-			b = 0;
-			g = x;
+			g = 0;
+			b = x;
 		} 
 		
-		if ((int)r != r && r < 255) {
-			r = (int)(r + 1);
-		}
-		if ((int)b != b && b < 255) {
-			b = (int)(b + 1);
-		}
-		if ((int)g != g && g < 255) {
-			g = (int)(g + 1);
+		if ((int)r != r) {
+			r = (int)((r + m)*255+1);
+		} else {
+			r = (int)((r + m)*255);
 		}
 		
-		setRed((int)r);
-		setGreen((int)g);
-		setBlue((int)blue);
+		if ((int)b != b) {
+			b = (int)((b + m)*255+1);
+		} else {
+			b = (int)((b + m)*255);
+		}
+		
+		if ((int)g != g) {
+			g = (int)((g + m)*255+1);
+		} else {
+			g = (int)((g + m)*255);
+		}
+		setRed((int)(r));
+		setGreen((int)(g));
+		setBlue((int)(b));
 		
 	}
 	public void printColor() {
