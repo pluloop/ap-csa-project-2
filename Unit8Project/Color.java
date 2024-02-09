@@ -115,21 +115,21 @@ public class Color {
 			return 0;
 		} 
 		
-		else if (cMax == r) {
-			return (int)((60.0*((g-b)/delta)%6));
+		if (cMax == r) {
+			return (int)(60.0*(((g-b)/delta)%6));
 		}
 		
-		else if (cMax == g) {
+		if (cMax == g) {
 			return (int)(60.0*(((b-r)/delta)+2));
 		}
 		
-		else if (cMax == b) {
+		if (cMax == b) {
 			return (int)(60.0*(((r-g)/delta)+4));
 		}
 		
-		else {
-			return -1;
-		}
+		
+		return -1;
+		
 	}
 	private int calculateSaturation(double r, double g, double b) {
 		r /= MAX_COLOR;
@@ -217,6 +217,7 @@ public class Color {
 		setBlue((int)(b));
 		
 	}
+	
 	public void printColor() {
 		char c = 176;
 		System.out.printf("%10s%3d%2s%3d%2s%3d%2s", "\tRGB = (" , red , ", " , green , ", " , blue , ")");
