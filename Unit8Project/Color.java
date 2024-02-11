@@ -110,25 +110,25 @@ public class Color {
 		double cMax = getMaximum(r, g, b);
 		double cMin = getMinimum(r, g, b);
 		double delta = cMax - cMin;
-	
-		if (delta == 0) {
-			return 0;
-		} 
+		int result = 0;
 		
 		if (cMax == r) {
-			return (int)(60.0*(((g-b)/delta)%6));
+			result = (int)(60.0*(((g-b)/delta)%6));
 		}
 		
 		if (cMax == g) {
-			return (int)(60.0*(((b-r)/delta)+2));
+			result = (int)(60.0*(((b-r)/delta)+2));
 		}
 		
 		if (cMax == b) {
-			return (int)(60.0*(((r-g)/delta)+4));
+			result = (int)(60.0*(((r-g)/delta)+4));
 		}
 		
+		if (result < 0) {
+			result += 360;
+		}
 		
-		return -1;
+		return result;
 		
 	}
 	private int calculateSaturation(double r, double g, double b) {
@@ -137,7 +137,7 @@ public class Color {
 		b /= MAX_COLOR;
 		double cMax = getMaximum(r, g, b);
 		double cMin = getMinimum(r, g, b);
-		double delta = cMax - cMin;
+		double delta = cMax - cMin;	
 		
 		if (cMax == 0) {
 			return 0;
@@ -195,23 +195,22 @@ public class Color {
 			b = x;
 		} 
 		
+		r = (r + m)*255;
+		b = (b + m)*255;
+		g = (g + m)*255;
+		
 		if ((int)r != r) {
-			r = (int)((r + m)*255+1);
-		} else {
-			r = (int)((r + m)*255);
-		}
+			r = (int)(r+1);
+		} 
 		
 		if ((int)b != b) {
-			b = (int)((b + m)*255+1);
-		} else {
-			b = (int)((b + m)*255);
-		}
+			b = (int)(b+1);
+		} 
 		
 		if ((int)g != g) {
-			g = (int)((g + m)*255+1);
-		} else {
-			g = (int)((g + m)*255);
-		}
+			g = (int)(g+1);
+		} 
+		
 		setRed((int)(r));
 		setGreen((int)(g));
 		setBlue((int)(b));

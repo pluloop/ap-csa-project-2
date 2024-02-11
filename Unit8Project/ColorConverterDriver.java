@@ -3,7 +3,6 @@ import java.io.File;
 import java.util.Scanner;
 import Color
 import ColorConverter;
-
 public class ColorConverterDriver {
 
 	public static void main(String[] args) {
@@ -78,7 +77,11 @@ public class ColorConverterDriver {
 		
 		
 		ColorConverter myColors = new ColorConverter(rows, cols, type, first, second, third);
-		myColors.RGBtoHSV();
+		if (type == 1) {
+			myColors.RGBtoHSV();
+		} else {
+			myColors.HSVtoRGB();
+		}
 		myColors.print();
 	}
 
